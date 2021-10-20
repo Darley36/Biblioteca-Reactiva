@@ -7,5 +7,5 @@ import javax.validation.Valid;
 
 @FunctionalInterface
 public interface SaveRecurso {
-    public Mono<String> apply(@Valid RecursoDTO recursoDTO);
+    Mono<RecursoDTO> apply(@Valid RecursoDTO recursoDTO);
 }

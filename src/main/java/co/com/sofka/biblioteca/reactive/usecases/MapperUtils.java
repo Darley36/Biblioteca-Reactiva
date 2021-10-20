@@ -8,10 +8,10 @@ import java.util.function.Function;
 
 @Component
 public class MapperUtils {
-    public Function<RecursoDTO, Recurso> mapperTorecurso(String id) {
+    public Function<RecursoDTO, Recurso> mapperTorecurso() {
         return updateRecurso -> {
             var recurso = new Recurso();
-            recurso.setId(id);
+            recurso.setId(updateRecurso.getId());
             recurso.setName(updateRecurso.getName());
             recurso.setAvailable(updateRecurso.isAvailable());
             recurso.setDate(updateRecurso.getDate());
