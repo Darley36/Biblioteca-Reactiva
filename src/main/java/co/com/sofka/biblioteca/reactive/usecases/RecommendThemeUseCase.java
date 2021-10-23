@@ -11,19 +11,19 @@ import java.util.function.Function;
 
 @Service
 @Validated
-public class RecommendTypeUseCase implements Function<String, Flux<RecursoDTO>> {
-
+public class RecommendThemeUseCase implements Function<String, Flux<RecursoDTO>> {
     private final RepositorioRecurso repositorioRecurso;
     private final MapperUtils mapperUtils;
 
-    public RecommendTypeUseCase(RepositorioRecurso repositorioRecurso, MapperUtils mapperUtils) {
+    public RecommendThemeUseCase(RepositorioRecurso repositorioRecurso, MapperUtils mapperUtils) {
         this.repositorioRecurso = repositorioRecurso;
         this.mapperUtils = mapperUtils;
     }
+
     @Override
-    public Flux<RecursoDTO> apply(String tipo){
-        Objects.requireNonNull(tipo,"El tipo es requerido");
-        return repositorioRecurso.findByType(tipo)
+    public Flux<RecursoDTO> apply(String tema){
+        Objects.requireNonNull(tema,"El tema es requerido");
+        return repositorioRecurso.findByThematic(tema)
                 .map(recurso -> mapperUtils.mapRecursoToDTO().apply(recurso));
     }
 }

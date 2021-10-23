@@ -30,7 +30,7 @@ public class ReturnRequestUseCase implements Function<String, Mono<String>> {
                 return repositorioRecurso.save(recurso)
                         .thenReturn("El recurso fue devuelto con exito");
             }
-            return Mono.just("Error en la entrega");
+            return Mono.just("Error al devolver");
         });
     }
 }
