@@ -7,4 +7,5 @@ import reactor.core.publisher.Flux;
 public interface RepositorioRecurso extends ReactiveMongoRepository<Recurso, String> {
     Flux<Recurso> findByThematic(String thematic);
     Flux<Recurso> findByType(final String type);
+    Flux<Recurso> findAllByTypeAndThematic (String type,String thematic);
 }
