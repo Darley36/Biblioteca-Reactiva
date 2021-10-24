@@ -29,13 +29,5 @@ public class CreateRecursoRouter {
                 request -> request.bodyToMono(RecursoDTO.class).flatMap(executor)
         );
 
-        /*return route(POST("/crear").and(accept(MediaType.APPLICATION_JSON)),
-                request -> request.bodyToMono(RecursoDTO.class)
-                        .flatMap(questionDTO -> createRecursoUseCase.apply(questionDTO)
-                                .flatMap(result -> ServerResponse.ok()
-                                        .contentType(MediaType.TEXT_PLAIN)
-                                        .bodyValue(result))
-                        )
-        );*/
     }
 }
