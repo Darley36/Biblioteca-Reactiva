@@ -1,7 +1,6 @@
 package co.com.sofka.biblioteca.reactive.usecases;
 
 import co.com.sofka.biblioteca.reactive.collections.Recurso;
-import co.com.sofka.biblioteca.reactive.model.RecursoDTO;
 import co.com.sofka.biblioteca.reactive.repositories.RepositorioRecurso;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -16,20 +15,19 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class AvailabilityRecursoUseCaseTest {
+class LoanApplicationUseCaseTest {
 
     @MockBean
     private RepositorioRecurso repositorioRecurso;
     @SpyBean
-    private AvailabilityRecursoUseCase availabilityRecursoUseCase;
+    private LoanApplicationUseCase loanApplicationUseCase;
 
     @Test
-    public void get() {
-
+    public void loanApplication() {
         var recurso =new Recurso();
         recurso.setId("xxx");
         recurso.setName("las aventuras");
-        recurso.setAvailable(true);
+        recurso.setAvailable(false);
         recurso.setDate(LocalDate.parse("2020-10-19"));
         recurso.setType("Libro");
         recurso.setThematic("Terror");
@@ -37,8 +35,7 @@ class AvailabilityRecursoUseCaseTest {
         recurso.setQuantityBorrowed(2);
 
         Mockito.when(repositorioRecurso.findById(Mockito.any(String.class))).thenReturn(Mono.just(recurso));
-
-        var respuesta = availabilityRecursoUseCase.apply("xxx");
-        Assertions.assertEquals(respuesta.block().toString(), "El recurso se encuentra disponible");
+        var respuesta = loanApplicationUseCase.apply("xxx");
+        Assertions.assertEquals(respuesta.block().toString(), "Recurso no se encuentra disponible");
     }
 }
