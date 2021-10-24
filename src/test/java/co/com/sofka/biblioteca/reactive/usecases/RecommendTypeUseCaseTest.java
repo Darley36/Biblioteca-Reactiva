@@ -23,7 +23,7 @@ class RecommendTypeUseCaseTest {
     private RecommendTypeUseCase recommendTypeUseCase;
 
     @Test
-    public void RecommendTheme() {
+    public void RecommendType() {
         var recurso =new Recurso();
         recurso.setId("xxx");
         recurso.setName("las aventuras");

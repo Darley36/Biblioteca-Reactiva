@@ -8,34 +8,34 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
-import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class RecommendThemeUseCaseTest {
+class ReturnRequestUseCaseTest {
 
     @MockBean
     private RepositorioRecurso repositorioRecurso;
     @SpyBean
-    private RecommendThemeUseCase recommendThemeUseCase;
+    private ReturnRequestUseCase returnRequestUseCase;
 
     @Test
-    public void RecommendTheme() {
+    public void ReturnRequest() {
         var recurso =new Recurso();
         recurso.setId("xxx");
         recurso.setName("las aventuras");
-        recurso.setAvailable(false);
+        recurso.setAvailable(true);
         recurso.setDate(LocalDate.parse("2020-10-19"));
         recurso.setType("Libro");
         recurso.setThematic("Terror");
         recurso.setQuantityAvailable(2);
         recurso.setQuantityBorrowed(2);
 
-        Mockito.when(repositorioRecurso.findByThematic(Mockito.any(String.class))).thenReturn(Flux.just(recurso));
-        var respuesta = recommendThemeUseCase.apply("Terror");
-        Assertions.assertEquals(respuesta.blockFirst().getName(), "las aventuras");
+        Mockito.when(repositorioRecurso.findById(Mockito.any(String.class))).thenReturn(Mono.just(recurso));
+        var respuesta = returnRequestUseCase.apply("xxx");
+        Assertions.assertEquals(respuesta.block().toString(), "Error al devolver");
     }
 }
